@@ -2,17 +2,21 @@ package top.redstarmc.api.Yggdrasil;
 
 import top.redstarmc.api.Yggdrasil.util.Logger;
 
+/**
+ * @version  0.0.1
+ * @author pingguomc
+ */
 public class Main {
 
     private Main() {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        System.out.println("Start Yggdrasil……");
+        System.out.println("作者：pingguomc");
+        System.out.println("github：https://github.com/RedStarMC/Yggdrasil-API");
         Logger logger = new Logger();
-        logger.info("测试");
-        logger.warn("测试");
-        logger.error("测试");
+        logger.info("正在启动……");
 
     }
 

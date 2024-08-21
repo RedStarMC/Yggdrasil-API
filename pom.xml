@@ -6,7 +6,7 @@
 
     <groupId>top.redstarmc.api</groupId>
     <artifactId>Yggdrasil</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
 <properties>
         <maven.compiler.source>19</maven.compiler.source>

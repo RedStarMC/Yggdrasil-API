@@ -1,17 +1,19 @@
 package top.redstarmc.api.Yggdrasil;
 
+import top.redstarmc.api.Yggdrasil.SQL.MySQL;
 import top.redstarmc.api.Yggdrasil.util.ConfigManager;
 import top.redstarmc.api.Yggdrasil.util.Logger;
 
 import java.io.File;
 
 /**
- * @version  0.0.1
+ * @version  0.0.2
  * @author pingguomc
  */
 public class Main {
     private static Logger logger;
     private static File Config;
+    private static MySQL sql;
     private Main() {
     }
 
@@ -24,14 +26,18 @@ public class Main {
         Logger logger = new Logger();
         setLogger(logger);
 
-        logger.info("正在启动……");
+        logger.info("===========正在启动===========");
         logger.info("读取配置文件……");
         ConfigManager configManager = new ConfigManager();
         configManager.saveConfig();
         setConfig(configManager.readConfig());
 
-
         logger.info("初始化数据库……");
+        MySQL sql = new MySQL();
+        setSql(sql);
+        sql.initSQLManager();
+
+
 
     }
 
@@ -52,5 +58,13 @@ public class Main {
 
     private static void setConfig(File config) {
         Config = config;
+    }
+
+    public static MySQL getSql() {
+        return sql;
+    }
+
+    private static void setSql(MySQL sql) {
+        Main.sql = sql;
     }
 }

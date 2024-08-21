@@ -64,7 +64,7 @@ public class Logger {
 
     private void writeFile(File file,String str){
         try {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))) {
                 writer.write(str);
                 writer.newLine();
             } catch (Exception e) {

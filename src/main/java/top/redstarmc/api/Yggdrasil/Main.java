@@ -1,23 +1,56 @@
 package top.redstarmc.api.Yggdrasil;
 
+import top.redstarmc.api.Yggdrasil.util.ConfigManager;
 import top.redstarmc.api.Yggdrasil.util.Logger;
+
+import java.io.File;
 
 /**
  * @version  0.0.1
  * @author pingguomc
  */
 public class Main {
-
+    private static Logger logger;
+    private static File Config;
     private Main() {
     }
 
     public static void main(String[] args) {
-        System.out.println("Start Yggdrasil……");
-        System.out.println("作者：pingguomc");
-        System.out.println("github：https://github.com/RedStarMC/Yggdrasil-API");
+        System.out.println("======================================================");
+        System.out.println("                 Start Yggdrasil ……");
+        System.out.println("作者：pingguomc     github：https://github.com/RedStarMC/Yggdrasil-API");
+        System.out.println("======================================================");
+        System.out.println("加载日志系统……");
         Logger logger = new Logger();
+        setLogger(logger);
+
         logger.info("正在启动……");
+        logger.info("读取配置文件……");
+        ConfigManager configManager = new ConfigManager();
+        configManager.saveConfig();
+        setConfig(configManager.readConfig());
+
+
+        logger.info("初始化数据库……");
 
     }
 
+
+
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    private static void setLogger(Logger logger) {
+        Main.logger = logger;
+    }
+
+    public static File getConfig() {
+        return Config;
+    }
+
+    private static void setConfig(File config) {
+        Config = config;
+    }
 }

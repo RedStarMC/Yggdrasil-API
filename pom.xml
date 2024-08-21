@@ -40,6 +40,17 @@
             <scope>compile</scope>
         </dependency>
         -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <!-- EasySQL依赖 -->
+        <dependency>
+            <groupId>cc.carm.lib</groupId>
+            <artifactId>easysql-hikaricp</artifactId>
+            <version>0.4.7</version>
+        </dependency>
         <!--web依赖包，web应用必备-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

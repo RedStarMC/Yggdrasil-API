@@ -1,5 +1,6 @@
 package top.redstarmc.api.Yggdrasil.SQL;
 
+import cc.carm.lib.easysql.EasySQL;
 import cc.carm.lib.easysql.api.SQLManager;
 import org.yaml.snakeyaml.Yaml;
 import top.redstarmc.api.Yggdrasil.Main;
@@ -20,16 +21,42 @@ public class MySQL {
         try (InputStream inputStream = new FileInputStream(config)) {
             Yaml yaml = new Yaml();
             Map<String, Object> config = yaml.load(inputStream);
-            String diver = (String) config.get("MySQL.driver");
-            String url = (String) config.get("MySQL.url");
-            String username = (String) config.get("MySQL.username");
-            String password = (String) config.get("MySQL.password");
+            Map<String,Object> sqlConfig = (Map<String, Object>) config.get("MySQL");
+            String url = (String) sqlConfig.get("url");
+            String diver = (String) sqlConfig.get("driver");
+            String username = (String) sqlConfig.get("username");
+            String password = (String) sqlConfig.get("password");
 
             logger.info("数据库链接地址："+url);
+            try {
+                //创建连接
+                sqlManager = EasySQL.createManager(diver,url,username,password);
+            }catch (Exception e){
+                logger.fatal("数据库链接失败！！"+e.getMessage());
+            }
 
         }catch (IOException e){
-            logger.error("加载数据库时IO异常"+e.getMessage());
+            logger.fatal("加载数据库时IO异常"+e.getMessage());
+        }
+
+        //开始链接
+        try {
+            if(!sqlManager.getConnection().isValid(5)){
+                logger.fatal("数据库链接超时！！！");
+            }
+
+        }catch (Exception e){
+            logger.fatal("无法链接到数据库！！！");
         }
     }
+
+    /**
+     *
+     */
+
+
+
+
+
 
 }

@@ -12,7 +12,7 @@ public class ConfigManager {
     String config = """
             SQLType: mysql
             MySQL:
-              driver: com.mysql.jdbc.Driver
+              driver: com.mysql.cj.jdbc.Driver
               url: jdbc:mysql://localhost:3306/ceshi
               username: root
               password: root
@@ -32,10 +32,10 @@ public class ConfigManager {
                     writer.newLine();
                 logger.info("成功生成配置文件");
                 } catch (Exception e) {
-                   logger.error("生成配置文件异常" + e.getMessage());
+                   logger.fatal("生成配置文件异常" + e.getMessage());
                 }
             } catch (Exception e) {
-                logger.error("生成配置文件异常"+e.getMessage());
+                logger.fatal("生成配置文件异常"+e.getMessage());
             }
         }
     }

@@ -1,5 +1,7 @@
 package top.redstarmc.api.Yggdrasil.util;
 
+import top.redstarmc.api.Yggdrasil.Main;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +32,16 @@ public class Logger {
         System.out.println(error);
         writeFile(startFile(),log);
     }
+    public void fatal(String string){
+        String time = getTime();
+        String fatal ="\u001B[44;97;1m["+time+"] "+"[\u001B[44;91;1mFATAL"+"\u001B[44;97;1m] "+"\u001B[44;91;1m"+string;
+        String log = "["+time+"] "+"[FATAL] "+string;
+        System.out.println(fatal);
+        writeFile(startFile(),log);
+
+        Main.shutDown();
+    }
+
 
 
 

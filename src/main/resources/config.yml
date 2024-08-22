@@ -1,8 +1,12 @@
 SQLType: mysql
 MySQL:
-  driver: com.mysql.jdbc.Driver
+  driver: com.mysql.cj.jdbc.Driver
   url: jdbc:mysql://localhost:3306/ceshi
   username: root
   password: root
 
 API-Server:
+  adders: localhost
+  port: 80
+
+SMTP-Server:

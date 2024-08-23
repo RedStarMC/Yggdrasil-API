@@ -6,7 +6,7 @@
 
     <groupId>top.redstarmc.api</groupId>
     <artifactId>Yggdrasil</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
 <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -62,6 +62,12 @@
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

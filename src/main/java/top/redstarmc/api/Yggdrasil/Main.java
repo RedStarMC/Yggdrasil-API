@@ -7,7 +7,7 @@ import top.redstarmc.api.Yggdrasil.util.Logger;
 import java.io.File;
 
 /**
- * @version  0.0.2
+ * @version  0.0.3
  * @author pingguomc
  */
 public class Main {

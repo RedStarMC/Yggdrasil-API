@@ -34,10 +34,16 @@ public class Logger {
     }
     public void fatal(String string){
         String time = getTime();
+        String tip = "\u001B[97m================================================================";
         String fatal ="\u001B[44;97;1m["+time+"] "+"[\u001B[44;91;1mFATAL"+"\u001B[44;97;1m] "+"\u001B[44;91;1m"+string;
         String log = "["+time+"] "+"[FATAL] "+string;
+
+        System.out.println(tip);
         System.out.println(fatal);
+        System.out.println(tip);
+        writeFile(startFile(),tip);
         writeFile(startFile(),log);
+        writeFile(startFile(),tip);
 
         Main.shutDown();
     }

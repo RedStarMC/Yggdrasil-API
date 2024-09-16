@@ -24,7 +24,7 @@ public class Main {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy 年 MM 月 dd 日 E    HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         System.out.println("========================================================================");
-        System.out.println("                          Start Yggdrasil ……           ");
+        System.out.println("                  Yggdrasil API Server Is Started ……           ");
         System.out.println(" 今天是："+formatter.format(date)+"    当前版本为："+version);
         System.out.println("作者：pingguomc     github：https://github.com/RedStarMC/Yggdrasil-API");
         System.out.println("========================================================================");
@@ -40,10 +40,13 @@ public class Main {
         configManager.saveConfig();
         setConfig(configManager.readConfig());
 
-        logger.info("初始化数据库……");
+        logger.info("初始化MySQL数据库……");
         MySQL sql = new MySQL();
         setSql(sql);
         sql.initSQLManager();
+
+        logger.warn("当前未启动 SQLite数据库备份 ");
+
 
 
 

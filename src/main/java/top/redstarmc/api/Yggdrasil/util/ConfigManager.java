@@ -13,9 +13,9 @@ public class ConfigManager {
             SQLType: mysql
             MySQL:
               driver: com.mysql.cj.jdbc.Driver
-              url: jdbc:mysql://localhost:3306/ceshi
+              url: jdbc:mysql://localhost:3306/test?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
               username: root
-              password: root
+              password: "root"
 
             API-Server:""";
     public void saveConfig(){

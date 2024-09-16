@@ -1,12 +1,11 @@
 package top.redstarmc.api.Yggdrasil.SQL;
 
 import cc.carm.lib.easysql.api.SQLManager;
-import cc.carm.lib.easysql.api.SQLQuery;
-import org.jetbrains.annotations.Nullable;
 import top.redstarmc.api.Yggdrasil.Main;
 import top.redstarmc.api.Yggdrasil.util.Logger;
 
 import java.sql.ResultSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class OperateTable {
     private final static Logger logger = Main.getLogger();
@@ -32,18 +31,25 @@ public class OperateTable {
         return username;
     }
     /**
-     * 查询
+     * 查询数据表是否存在
+     * 返回true表示该表存在
      * @param sqlManager 数据库管理器
+     * @param name 数据表名称
      */
-    public static void query(SQLManager sqlManager) {
-        sqlManager.createQuery() // 创建一个查询
-                .inTable("table_name") // 指定表名
-                .selectColumns("name", "sex", "age") // 选择 "name", "sex", "age" 三个列
-                .addCondition("name", "Bob") // 限定条件，"name" 必须是 Bob
-                .build()/*构建查询体*/.executeAsync(
-                        (query) -> { /*处理查询结果-SQLQuery*/ },
-                        ((exception, sqlAction) -> { /*SQL异常处理-SQLExceptionHandler*/ })
-                ); // 异步查询~~~~
+    public static boolean queryTable(SQLManager sqlManager,String name) {
+        AtomicBoolean a = new AtomicBoolean(false);
+        sqlManager.createQuery().inTable(name).build().executeAsync(
+                (query) -> {
+                    ResultSet resultSet = query.getResultSet();
+                    if (resultSet != null){
+                        a.set(true);
+                    }
+                },
+                ((exception,sqlAction) -> {
+                    a.set(false);
+                })
+        );
+        return a.get();
     }
     /**
      * 查询

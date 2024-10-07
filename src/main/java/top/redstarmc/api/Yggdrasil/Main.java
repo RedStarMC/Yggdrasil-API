@@ -1,5 +1,6 @@
 package top.redstarmc.api.Yggdrasil;
 
+import org.springframework.boot.SpringApplication;
 import top.redstarmc.api.Yggdrasil.SQL.MySQL;
 import top.redstarmc.api.Yggdrasil.util.ConfigManager;
 import top.redstarmc.api.Yggdrasil.util.Logger;
@@ -9,11 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @version  0.0.3
+ * @version  0.0.4
  * @author pingguomc
  */
 public class Main {
-    private static final String version = "0.0.3";
+    private static final String version = "0.0.4";
     private static Logger logger;
     private static File Config;
     private static MySQL sql;
@@ -48,6 +49,8 @@ public class Main {
         logger.warn("当前未启动 SQLite数据库备份 ");
 
 
+        logger.info("启动Spring boot主程序……");
+        SpringApplication.run(Application.class, args);
 
 
         //启动完毕

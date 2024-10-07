@@ -38,12 +38,13 @@ public class OperateTable {
      */
     public static boolean queryTable(SQLManager sqlManager,String name) {
         AtomicBoolean a = new AtomicBoolean(false);
-        sqlManager.createQuery().inTable(name).build().executeAsync(
+        sqlManager.createQuery().inTable(name).build().execute(
                 (query) -> {
                     ResultSet resultSet = query.getResultSet();
                     if (resultSet != null){
                         a.set(true);
                     }
+                    return a;
                 },
                 ((exception,sqlAction) -> {
                     a.set(false);

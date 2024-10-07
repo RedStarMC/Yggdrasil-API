@@ -7,8 +7,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Encryption {
+    private final static String salt = "3f8y9dak";
     private final Logger logger = Main.getLogger();
-    public String passWrodSHA256(String password,String salt){
+    public String passWrodSHA256(String password){
         //输入的字符串转换成字节数组
         String wait_pass_word = password+salt;
         byte[] bytes = wait_pass_word.getBytes(StandardCharsets.UTF_8);

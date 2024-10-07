@@ -1,4 +1,4 @@
-package top.redstarmc.api.Yggdrasil.Tables;
+package top.redstarmc.api.Yggdrasil.SQL.Tables;
 
 import cc.carm.lib.easysql.api.SQLManager;
 import cc.carm.lib.easysql.api.SQLTable;
@@ -10,27 +10,20 @@ import org.jetbrains.annotations.Nullable;
 import top.redstarmc.api.Yggdrasil.Main;
 import top.redstarmc.api.Yggdrasil.util.Logger;
 
-
 import java.sql.SQLException;
 import java.util.function.Consumer;
 
-public enum Users implements SQLTable {
-    YGGDRASIL_USER((table) -> {
+public enum Profiles implements SQLTable {
+    YGGDRASIL_PROFILES((table) -> {
         table.addAutoIncrementColumn("id", NumberType.INT, true, true);
-        table.addColumn("uuid", "TEXT NOT NULL UNIQUE KEY");
-        table.addColumn("username", "TEXT NOT NULL");   //邮箱的前面
-        table.addColumn("email", "TEXT NOT NULL");
-        table.addColumn("profile", "TEXT NOT NULL");  //角色名
-        table.addColumn("texture", "TEXT");   //材质名
-        table.addColumn("cape", "CHAR");    //披风
-        table.addColumn("clientToken", "TEXT");
-        table.addColumn("accessToken", "TEXT NOT NULL");
-        table.addColumn("TokenTime", "TIMESTAMP ");  //令牌颁发时间
-        table.addColumn("registerTime", "TIMESTAMP NOT NULL");   //注册时间
+        table.addColumn("uuid", "TEXT NOT NULL");
+        table.addColumn("name","CHAR NOT NULL");
+        table.addColumn("modelType","ENUM（'default'，'slim'）NOT NULL");
+        table.addColumn("SKIN","TEXT");
+        table.addColumn("CAPE","TEXT");
 
-        table.setIndex("username", IndexType.UNIQUE_KEY); //索引
-        table.setIndex("accessToken", IndexType.UNIQUE_KEY);
-        table.setIndex("uuid", IndexType.UNIQUE_KEY);
+        table.setIndex("uuid", IndexType.UNIQUE_KEY); //索引
+        table.setIndex("name", IndexType.UNIQUE_KEY);
 //        table.setIndex(IndexType.INDEX, "contact", "email", "phone"); //添加联合索引 (示例)
     });
 
@@ -38,7 +31,7 @@ public enum Users implements SQLTable {
     private @Nullable String tablePrefix;
     private @Nullable SQLManager manager;
     private final static Logger logger = Main.getLogger();
-    Users(Consumer<TableCreateBuilder> builder) {
+    Profiles(Consumer<TableCreateBuilder> builder) {
         this.builder = builder;
     }
 
@@ -68,7 +61,7 @@ public enum Users implements SQLTable {
     }
 
     public static void initialize(@NotNull SQLManager manager, @Nullable String tablePrefix) {
-        for (Users value : values()) {
+        for (Profiles value : values()) {
             try {
                 value.create(manager, tablePrefix);
             } catch (SQLException e) {

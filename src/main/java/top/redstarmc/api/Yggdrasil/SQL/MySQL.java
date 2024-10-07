@@ -4,7 +4,9 @@ import cc.carm.lib.easysql.EasySQL;
 import cc.carm.lib.easysql.api.SQLManager;
 import org.yaml.snakeyaml.Yaml;
 import top.redstarmc.api.Yggdrasil.Main;
-import top.redstarmc.api.Yggdrasil.Tables.Users;
+import top.redstarmc.api.Yggdrasil.SQL.Tables.Profiles;
+import top.redstarmc.api.Yggdrasil.SQL.Tables.Tokens;
+import top.redstarmc.api.Yggdrasil.SQL.Tables.Users;
 import top.redstarmc.api.Yggdrasil.util.Logger;
 
 import java.io.File;
@@ -62,25 +64,36 @@ public class MySQL {
     public void createDataTables(){
         String prefix ="YGGDRASIL";
         String name1 ="Users";
-        String name2 ="";
-        boolean a = OperateTable.queryTable(sqlManager,name1);
-//        boolean b = OperateTable.queryTable(sqlManager,name2);
-        if (a){
-            logger.info(prefix + name1 + "数据表已存在");
+        String name2 ="Tokens";
+        String name3 ="Profiles";
+        boolean a = OperateTable.queryTable(sqlManager,prefix+name1);
+        boolean b = OperateTable.queryTable(sqlManager,prefix+name2);
+        boolean c = OperateTable.queryTable(sqlManager,prefix+name3);
+
+
+        try {
+            Thread.sleep(1234);
+        } catch (InterruptedException e) {
+            logger.error(e.getLocalizedMessage());
+            //new RuntimeException(e)
         }
-        else {
+
+
+        if (!a){
             Users.initialize(sqlManager,prefix);
             logger.info(prefix + name1 + "数据表已创建");
         }
-//        if (b){
-//            logger.info(prefix + name2 + "数据表已存在");
-//        }
-//        else {
-//            Users.initialize(sqlManager,prefix);
-//            logger.info(prefix + name2 + "数据表已创建");
-//        }
-    }
 
+        if (!b){
+            Tokens.initialize(sqlManager,prefix);
+            logger.info(prefix + name2 + "数据表已创建");
+        }
+
+        if (!c){
+            Profiles.initialize(sqlManager,prefix);
+            logger.info(prefix + name3 + "数据表已创建");
+        }
+    }
 
     public SQLManager getSqlManager() {
         return sqlManager;
